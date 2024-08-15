@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html{
+    /* background-color: #0e0e10; */
+}
+main{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+}
+.container{
+    position: absolute; /* main 기준 */
+    display: grid;
+    grid-template-columns: 47.5% 47.5%; /* 47.5% * 2 + 5% = 100% */
+    gap: 5%;
+    top: 0; left: 5%;
+    width: 90%; height: 2500px;
+    will-change: transform; /* translate 으로 스크롤하기 위하여 */
+    /* border: 1px solid red; */
+}
+.item{
+    position: relative;
+    /* border: 1px solid blue; */
+    left: 50%; top: 50%; /* 현재 위치에서 grid 하나의 셀 기준으로 우측 아래로 셀의 50%만큼씩 이동 */
+    transform: translate(-50%, -50%); /* translate 을 하면 자신의 너비와 높이의 50%만큼 좌측과 위로 이동. translate 의 두번째 인자는 자신의 높이가 0이므로 이동안함 */
+    width: 100%; height: 0; /* height 이 0이라도 padding-bottom 만큼 공간을 차지함 */
+    padding-bottom: 56.25%; /* 해당 비율 (16:1)만큼 높이가 유지됨 */ 
+    overflow: hidden;
+}
+.img_wrap{
+    /* border: 1px solid yellow; */
+    position: absolute; /* item 기준 */
+    width: 100%;
+    --overflow: 40px; /* 지역변수 */
+    height: calc(100% + (var(--overflow) * 2)); /* 100% 에 위아래 40px 만큼씩 여유를 둠 */
+    top: calc(-1 * var(--overflow)); /* 40px 만큼씩 위아래에 남음 */
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform; /* transltate 으로 위치이동을 위해서 */
+}
+
+@media screen and (max-width: 760px){
+    .container{
+        grid-template-columns: 100%; /* 한줄에 하나의 이미지만 보이기 */
+    }
+}
+
